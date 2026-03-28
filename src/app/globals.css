@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-base: #EEF3FF;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-muted: #F1F5FF;
+  --color-blue-primary: #1B4FD8;
+  --color-blue-hover: #2563EB;
+  --color-blue-soft: #DBEAFE;
+  --color-violet: #7C3AED;
+  --color-violet-soft: #EDE9FE;
+  --color-gold: #D97706;
+  --color-gold-soft: #FEF3C7;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-success: #059669;
+  --color-danger: #DC2626;
+  --color-warning: #D97706;
+  --color-border: rgba(99,120,180,0.12);
+  --color-border-hover: rgba(37,99,235,0.25);
+  --font-tajawal: var(--font-family-tajawal);
+  --font-rajdhani: var(--font-family-rajdhani);
+  --font-mono: var(--font-family-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.06);
+  --shadow-md: 0 4px 16px rgba(15,23,42,0.08);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,0.10);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-tajawal), sans-serif;
+}
+
+/* Rajdhani for numbers/amounts */
+.font-num {
+  font-family: var(--font-rajdhani), sans-serif;
+  font-weight: 700;
+}
+
+/* JetBrains Mono for IDs/data */
+.font-data {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Skeleton loading animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.skeleton {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background: var(--color-bg-muted);
+  border-radius: 8px;
 }
