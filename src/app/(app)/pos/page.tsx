@@ -1,5 +1,5 @@
 'use client'
-
+export const dynamic = 'force-dynamic'
 import { useState, useEffect, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
@@ -66,7 +66,7 @@ export default function PosPage() {
   useEffect(() => {
     navigator.geolocation?.getCurrentPosition(
       pos => setGps({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => {}
+      () => { }
     )
   }, [])
 
@@ -82,7 +82,7 @@ export default function PosPage() {
           setActiveBillingYear(eff.getFullYear())
         }
       })
-      .catch(() => {})
+      .catch(() => { })
   }, [])
 
   // Check offline status
@@ -100,7 +100,7 @@ export default function PosPage() {
 
   // Check pending offline payments
   useEffect(() => {
-    getPendingPayments().then(p => setPendingCount(p.length)).catch(() => {})
+    getPendingPayments().then(p => setPendingCount(p.length)).catch(() => { })
   }, [step])
 
   // Pre-select subscriber from URL param
@@ -124,9 +124,9 @@ export default function PosPage() {
             })
           }
         })
-        .catch(() => {})
+        .catch(() => { })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
 
   // Fetch alleys on mount
@@ -134,7 +134,7 @@ export default function PosPage() {
     fetch('/api/subscribers/alleys')
       .then(r => r.json())
       .then(data => setAlleys(data.alleys || []))
-      .catch(() => {})
+      .catch(() => { })
   }, [])
 
   // Browse subscribers with filters (when not searching by text)
@@ -378,11 +378,10 @@ export default function PosPage() {
               <button
                 key={chip.key}
                 onClick={() => setTypeFilter(chip.key)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  typeFilter === chip.key
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${typeFilter === chip.key
                     ? chip.key === 'gold' ? 'bg-gold text-white' : 'bg-blue-primary text-white'
                     : 'bg-bg-surface text-text-muted border border-border'
-                }`}
+                  }`}
               >
                 {chip.label}
               </button>
@@ -391,11 +390,10 @@ export default function PosPage() {
             {/* Unpaid toggle */}
             <button
               onClick={() => setUnpaidOnly(v => !v)}
-              className={`mr-auto px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
-                unpaidOnly
+              className={`mr-auto px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${unpaidOnly
                   ? 'bg-danger text-white'
                   : 'bg-bg-surface text-text-muted border border-border'
-              }`}
+                }`}
             >
               {unpaidOnly ? '✓ ' : ''}غير المدفوعين
             </button>
@@ -406,11 +404,10 @@ export default function PosPage() {
             <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar">
               <button
                 onClick={() => setAlleyFilter('')}
-                className={`shrink-0 px-3 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                  !alleyFilter
+                className={`shrink-0 px-3 py-1 rounded-lg text-[11px] font-medium transition-all ${!alleyFilter
                     ? 'bg-violet text-white'
                     : 'bg-bg-surface text-text-muted border border-border'
-                }`}
+                  }`}
               >
                 كل الأزقة
               </button>
@@ -418,17 +415,15 @@ export default function PosPage() {
                 <button
                   key={a.id}
                   onClick={() => setAlleyFilter(alleyFilter === a.id ? '' : a.id)}
-                  className={`shrink-0 px-3 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                    alleyFilter === a.id
+                  className={`shrink-0 px-3 py-1 rounded-lg text-[11px] font-medium transition-all ${alleyFilter === a.id
                       ? 'bg-violet text-white'
                       : 'bg-bg-surface text-text-muted border border-border'
-                  }`}
+                    }`}
                 >
                   {a.name}
                   {a.unpaid > 0 && (
-                    <span className={`font-num text-[10px] mr-0.5 ${
-                      alleyFilter === a.id ? 'text-white/80' : 'text-danger'
-                    }`}>
+                    <span className={`font-num text-[10px] mr-0.5 ${alleyFilter === a.id ? 'text-white/80' : 'text-danger'
+                      }`}>
                       ({a.unpaid})
                     </span>
                   )}
@@ -459,7 +454,7 @@ export default function PosPage() {
             <>
               {browseLoading && browseResults.length === 0 && (
                 <div className="space-y-2">
-                  {[1,2,3,4].map(i => <div key={i} className="skeleton h-16 rounded-2xl" />)}
+                  {[1, 2, 3, 4].map(i => <div key={i} className="skeleton h-16 rounded-2xl" />)}
                 </div>
               )}
               {!browseLoading && browseResults.length === 0 && (
@@ -502,9 +497,8 @@ export default function PosPage() {
                 <p className="text-sm font-bold">{selected.name}</p>
                 <p className="font-data text-xs text-text-muted">#{selected.serial_number}</p>
               </div>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                selected.subscription_type === 'gold' ? 'bg-gold-soft text-gold' : 'bg-blue-soft text-blue-primary'
-              }`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${selected.subscription_type === 'gold' ? 'bg-gold-soft text-gold' : 'bg-blue-soft text-blue-primary'
+                }`}>
                 {selected.subscription_type === 'gold' ? 'ذهبي' : 'عادي'}
               </span>
             </div>
@@ -522,11 +516,10 @@ export default function PosPage() {
                   <button
                     onClick={() => { setPayType('invoice'); setAmount(String(monthlyDue)) }}
                     disabled={monthlyDue <= 0}
-                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${
-                      payType === 'invoice'
+                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${payType === 'invoice'
                         ? 'bg-blue-primary text-white ring-2 ring-blue-primary ring-offset-2'
                         : 'bg-bg-surface border border-border'
-                    }`}
+                      }`}
                     style={{ boxShadow: payType === 'invoice' ? '0 4px 20px rgba(27,79,216,0.2)' : 'var(--shadow-sm)' }}
                   >
                     <p className="text-[10px] mb-1 opacity-80">فاتورة الشهر</p>
@@ -540,11 +533,10 @@ export default function PosPage() {
                   <button
                     onClick={() => { setPayType('debt'); setAmount(String(debt)) }}
                     disabled={debt <= 0}
-                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${
-                      payType === 'debt'
+                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${payType === 'debt'
                         ? 'bg-danger text-white ring-2 ring-danger ring-offset-2'
                         : 'bg-bg-surface border border-border'
-                    }`}
+                      }`}
                     style={{ boxShadow: payType === 'debt' ? '0 4px 20px rgba(220,38,38,0.2)' : 'var(--shadow-sm)' }}
                   >
                     <p className="text-[10px] mb-1 opacity-80">الديون</p>
@@ -558,11 +550,10 @@ export default function PosPage() {
                   <button
                     onClick={() => { setPayType('all'); setAmount(String(allTotal)) }}
                     disabled={allTotal <= 0}
-                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${
-                      payType === 'all'
+                    className={`rounded-2xl p-3 text-center transition-all disabled:opacity-30 ${payType === 'all'
                         ? 'bg-success text-white ring-2 ring-success ring-offset-2'
                         : 'bg-bg-surface border border-border'
-                    }`}
+                      }`}
                     style={{ boxShadow: payType === 'all' ? '0 4px 20px rgba(5,150,105,0.2)' : 'var(--shadow-sm)' }}
                   >
                     <p className="text-[10px] mb-1 opacity-80">الكل</p>
@@ -810,16 +801,14 @@ function MethodButton({
   return (
     <button
       onClick={onClick}
-      className={`w-full rounded-2xl p-4 flex items-center gap-3 text-right transition-all ${
-        active
+      className={`w-full rounded-2xl p-4 flex items-center gap-3 text-right transition-all ${active
           ? 'bg-blue-soft border-2 border-blue-primary'
           : 'bg-bg-surface border border-border'
-      }`}
+        }`}
       style={{ boxShadow: active ? '0 4px 20px rgba(27,79,216,0.12)' : 'var(--shadow-sm)' }}
     >
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-        active ? 'bg-blue-primary text-white' : 'bg-bg-muted text-text-muted'
-      }`}>
+      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${active ? 'bg-blue-primary text-white' : 'bg-bg-muted text-text-muted'
+        }`}>
         <Icon size={18} />
       </div>
       <div className="flex-1">
